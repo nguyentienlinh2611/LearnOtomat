@@ -45,6 +45,7 @@ Tạo đối tượng CKY với xâu đầu vào cần kiểm tra.
 Thêm quy tắc sinh  S -> A B.  
 `cky.addProductionRule("S -> A B");`  
 ### Lưu ý:  
+Quy tắc sinh phải ở dạng chuẩn Chomsky.  
 Các trạng thái trong quy tắc sinh phải được phân biệt với nhau bởi dấu cách.  
 Ký hiệu chuyển phải là ->  
 Trạng thái bắt đầu phải là S  
