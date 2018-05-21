@@ -49,4 +49,7 @@ Quy tắc sinh phải ở dạng chuẩn Chomsky.
 Các trạng thái trong quy tắc sinh phải được phân biệt với nhau bởi dấu cách.  
 Ký hiệu chuyển phải là ->  
 Trạng thái bắt đầu phải là S  
-
+## Reference  
+Thuật toán tối tiểu hóa  https://en.wikipedia.org/wiki/DFA_minimization  
+Thuật toán CKY  https://en.wikipedia.org/wiki/CYK_algorithm  
+Demo làm CKY bằng tay https://www.youtube.com/watch?v=b98Uyj7JHIU&t=407s
