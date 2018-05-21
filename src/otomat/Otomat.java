@@ -61,12 +61,13 @@ public class Otomat {
 			for (Character s2 : State) {
 				if (!s1.equals(s2)) {
 					for (Character word : Word) {
-						if (this.getDestState(s2, word).equals(s1) || Start.equals(s1)) {
-							if (unreachableState.contains(s1)) {
-								unreachableState.remove(s1);
+						if (this.getDestState(s2, word)!=null)
+							if (this.getDestState(s2, word).equals(s1) || Start.equals(s1)) {
+								if (unreachableState.contains(s1)) {
+									unreachableState.remove(s1);
+								}
+								break;
 							}
-							break;
-						}
 					}
 				}
 			}
@@ -212,17 +213,19 @@ public class Otomat {
 						for (Character word : Word) {
 							Character pdest = this.getDestState(p, word);
 							Character qdest = this.getDestState(q, word);
-							if (isDifferentPartition(pdest, qdest, partition)) {
-								System.out.println("Tach " + p + " va " + q);
-								System.out.println(
-										"Do theo " + word + ", " + p + " ra " + pdest + " va " + q + " ra " + qdest);
-								separable = true;
-								break;
-							} else {
-								System.out.println("Hop nhat " + p + " va " + q);
-								System.out.println(
-										"Do theo " + word + ", " + p + " ra " + pdest + " va " + q + " ra " + qdest);
-								separable = false;
+							if(pdest!=null&&qdest!=null) {
+								if (isDifferentPartition(pdest, qdest, partition)) {
+									System.out.println("Tach " + p + " va " + q);
+									System.out.println(
+											"Do theo " + word + ", " + p + " ra " + pdest + " va " + q + " ra " + qdest);
+									separable = true;
+									break;
+								} else {
+									System.out.println("Hop nhat " + p + " va " + q);
+									System.out.println(
+											"Do theo " + word + ", " + p + " ra " + pdest + " va " + q + " ra " + qdest);
+									separable = false;
+								}
 							}
 						}
 						if(separable) {
@@ -278,12 +281,14 @@ public class Otomat {
 							for(Character word : Word) {
 								Character statedest = this.getDestState(state, word);
 								Character qdest = this.getDestState(q, word);
-								if(isDifferentPartition(statedest, qdest, partition)) {
-									qlist.remove(state);
-									break;
-								}else {
-									if(!qlist.contains(state)) {
-										qlist.add(state);
+								if(statedest!=null&&qdest!=null) {
+									if(isDifferentPartition(statedest, qdest, partition)) {
+										qlist.remove(state);
+										break;
+									}else {
+										if(!qlist.contains(state)) {
+											qlist.add(state);
+										}
 									}
 								}
 							}
