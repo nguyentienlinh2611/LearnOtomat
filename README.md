@@ -1,5 +1,10 @@
 # LearnOtomat
-Chương trình được viết bằng Java. Gồm có các thuật toán tối tiểu hóa Otomat đơn định hữu hạn, kiểm tra đoán nhận xâu của otomat đơn định hữu hạn, thuật toán CKY kiểm tra đoán nhận xâu của tập quy tắc sinh của ngôn ngữ phi ngữ cảnh.
+Chương trình được viết bằng Java. Gồm có các thuật toán:  
+-  Thuật toán đơn định hóa otomat hữu hạn
+-  Tối tiểu hóa Otomat đơn định hữu hạn
+-  Kiểm tra đoán nhận xâu của otomat đơn định hữu hạn
+-  Thuật toán chuyển văn phạm phi ngữ cảnh epsilon tự do bất kì đã cho về dạng chuẩn Chomsky
+-  Thuật toán CKY kiểm tra đoán nhận xâu của tập quy tắc sinh của ngôn ngữ phi ngữ cảnh.
 ## Deterministic finite automata
 Tạo một otomat đơn định hữu hạn  
 `Otomat myOtomat = new Otomat();`  
