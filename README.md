@@ -44,6 +44,8 @@ myOtomat.setFinish(finish);
 ```  
 Kiểm tra xem xâu đầu vào có được đoán nhận bởi otomat đơn định hữu hạn hay không  
 `Otomat.CheckAccept(string)`  
+## Chomsky Normal Form Converter  
+Epsilon được kí hiệu là dấu $. Tham khảo cách làm tại: https://cs.stackexchange.com/questions/72511/can-the-algorithm-to-convert-to-chomsky-normal-form-result-in-useless-producti/72518#72518
 ## CKY  
 Tạo đối tượng CKY với xâu đầu vào cần kiểm tra.  
 `CKY cky = new CKY(input);`  
