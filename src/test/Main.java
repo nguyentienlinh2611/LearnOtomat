@@ -44,5 +44,4 @@ public class Main {
 		System.out.println();
 		myOtomat.printOtomat();
 	}
-
 }

@@ -31,6 +31,63 @@ public class CKY {
 		}
 	}
 	
+	public void convertToChomskyNorm() {
+		removeStartStateOnRight();
+		removeEpsilon();
+		removeUnitProduction();
+		removeUselessStates();
+		removeMixed();
+		removeLong();
+	}
+
+	private void removeLong() {
+		
+	}
+
+	private void removeMixed() {
+		
+	}
+
+	private void removeUselessStates() {
+		
+	}
+
+	private void removeUnitProduction() {
+		
+	}
+
+	private void removeEpsilon() {
+		
+	}
+	
+	private void removeStartStateOnRight() {
+		for(ProductionRule productionRule : grammar) {
+			if(productionRule.V.contains(startSymbol)) {
+				String newStartState = startSymbol + "'";
+				do
+					newStartState += "'";
+				while(N.contains(newStartState));
+				addProductionRule(newStartState+" -> "+startSymbol);
+				setStartSymbol(newStartState);
+				break;
+			}
+		}
+	}
+	
+	public void printProductionRule() {
+		for(int i=0;i<grammar.size();i++) {
+			ProductionRule productionRule = grammar.get(i);
+			for(String n : productionRule.N) {
+				System.out.print(n+" ");
+			}
+			System.out.print("-> ");
+			for(String v : productionRule.V) {
+				System.out.print(v+" ");
+			}
+			System.out.println();
+		}
+	}
+	
 	public CKY(String input) {
 		N = new ArrayList<String>();
 		T = new ArrayList<String>();
@@ -67,9 +124,11 @@ public class CKY {
 		}
 	}
 	
-	public void setStartSymbol(int value) {
-		startSymbol = N.get(value);
-		System.out.println("You have set start symbol is " + startSymbol);
+	public void setStartSymbol(String state) {
+		if(N.contains(state))
+			startSymbol = state;
+		else
+			System.err.println("Trang thai dau vao la khong o trong tap trang thai");
 	}
 	
 	public ArrayList<String> getN(){
@@ -118,24 +177,6 @@ public class CKY {
 	}
 
 	public boolean solve() {
-		/*
-		 * let the input be a string S consisting of n characters: a1 ... an.
-		 * let the grammar contain r nonterminal symbols R1 ... Rr.
-		 * This grammar contains the subset Rs which is the set of start symbols.
-		 * let P[n,n,r] be an array of booleans. Initialize all elements of P to false.
-		 * for each s = 1 to n
-		 *   for each unit production Rr -> ai
-		 *     set P[1,s,r] = true
-		 * for each l = 2 to n -- Length of span
-		 *   for each s = 1 to n-i+1 -- Start of span
-		 *     for each p = 1 to i-1 -- Partition of span
-		 *       for each production RA -> RB RC
-		 *         if P[s,p,B] and P[s+p,l-p,C] then set P[s,l,A] = true
-		 * if any of P[n,1,x] is true (x is iterated over the set s, where s are all the indices for Rs) then
-		 *   S is member of language
-		 * else
-		 *   S is not member of language
-		 */
 		int n = T.size();
 		for(int s=0;s<n;s++) {
 			for (int i=0;i<grammar.size();i++) {
@@ -164,7 +205,7 @@ public class CKY {
 				}
 			}
 		}
-		if(table[n-1][0].contains("S")) {
+		if(table[n-1][0].contains(startSymbol)) {
 			return true;
 		}
 		return false;
@@ -185,11 +226,14 @@ public class CKY {
 		cky.addProductionRule("B -> S1 S1");
 		cky.addProductionRule("B -> b");
 		cky.addProductionRule("VA -> a");
+		cky.setStartSymbol("S");
 
 		if(cky.solve())
 			System.out.println("Xau "+input+" co the sinh ra duoc tu tap quy tac tren");
 		else
 			System.out.println("Xau "+input+" khong the sinh ra duoc tu tap quy tac tren");
 		cky.printTable();
+		cky.convertToChomskyNorm();
+		cky.printProductionRule();
 	}
 }

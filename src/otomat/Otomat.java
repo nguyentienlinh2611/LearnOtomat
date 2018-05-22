@@ -209,7 +209,6 @@ public class Otomat {
 			for (Character p : set) {
 				for (Character q : set) {
 					if (!q.equals(p)) {
-						boolean separable = false;
 						for (Character word : Word) {
 							Character pdest = this.getDestState(p, word);
 							Character qdest = this.getDestState(q, word);
@@ -218,20 +217,10 @@ public class Otomat {
 									System.out.println("Tach " + p + " va " + q);
 									System.out.println(
 											"Do theo " + word + ", " + p + " ra " + pdest + " va " + q + " ra " + qdest);
-									separable = true;
+									separateState(p, q, newPartition, partition);
 									break;
-								} else {
-									System.out.println("Hop nhat " + p + " va " + q);
-									System.out.println(
-											"Do theo " + word + ", " + p + " ra " + pdest + " va " + q + " ra " + qdest);
-									separable = false;
 								}
 							}
-						}
-						if(separable) {
-							separateState(p, q, newPartition, partition);
-						} else {
-							combineState(p, q, newPartition);
 						}
 					}
 				}
@@ -254,19 +243,6 @@ public class Otomat {
 	private void copyState(ArrayList<Character> newState, ArrayList<Character> State) {
 		for (Character state : State) {
 			newState.add(state);
-		}
-	}
-
-	private void combineState(Character p, Character q, ArrayList<ArrayList<Character>> partition) {
-		if (isDifferentPartition(p, q, partition)) {
-			for (ArrayList<Character> set : partition) {
-				if (!set.contains(p) && set.contains(q)) {
-					set.remove(q);
-				}
-				if (set.contains(p) && !set.contains(q)) {
-					set.add(q);
-				}
-			}
 		}
 	}
 
